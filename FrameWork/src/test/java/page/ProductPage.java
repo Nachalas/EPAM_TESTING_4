@@ -61,7 +61,6 @@ public class ProductPage extends AbstractPage {
     @Override
     public ProductPage openPage() {
         driver.navigate().to(productPageUrl);
-        driver.navigate().refresh();
         logger.info("Opened page " +  productPageUrl);
         return this;
     }

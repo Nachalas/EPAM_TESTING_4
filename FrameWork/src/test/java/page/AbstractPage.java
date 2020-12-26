@@ -4,6 +4,7 @@ import driver.DriverSingleton;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -13,6 +14,7 @@ public abstract class AbstractPage
 	protected static final int WAIT_TIMEOUT_SECONDS = 30;
 	protected final WebDriverWait driverWait;
 	protected WebDriver driver;
+	protected Actions actions;
 
 
 	protected abstract AbstractPage openPage();
@@ -22,6 +24,7 @@ public abstract class AbstractPage
 		this.driver = DriverSingleton.getDriver();
 		PageFactory.initElements(this.driver, this);
 		driverWait = new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS);
+		actions = new Actions(driver);
 	}
 
 }

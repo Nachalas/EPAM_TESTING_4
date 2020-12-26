@@ -15,12 +15,6 @@ public class ProfilePage extends AbstractPage {
     @FindBy (xpath = "//div[@class='_2roWJCL3cYLWn-WGjDB73j']")
     WebElement welcomeTextName;
 
-//    @FindBy (xpath = "//div[@class='_3VF3HxCxwyIelbCYO3EPjU']")
-//    WebElement myInformationButton;
-
-//    @FindBy (xpath = "//input[@type='email']")
-//    WebElement currentEmailInput;
-
     public ProfilePage() {
         super();
     }
