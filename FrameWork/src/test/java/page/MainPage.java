@@ -33,6 +33,8 @@ public class MainPage extends AbstractPage {
 	@FindBy(xpath = "//span[@class='_1iEQyiq']")
 	private List<WebElement> listOfSuggestions;
 
+	@FindBy(xpath = "")
+
 
 
 	public MainPage()
@@ -60,14 +62,29 @@ public class MainPage extends AbstractPage {
 		return Utils.parseListOfWebElementsToListOfStrings(listOfSuggestions);
 	}
 
-	public SearchResultPage clickOnSearchButton(){
+	public SearchResultPage clickOnSearchButton() {
 		this.searchButton.click();
 		return new SearchResultPage();
 	}
 
+	public MainPage selectSex (String sex) {
+		driver.findElement(By.xpath("//a[contains(text(), '" + sex + "')]")).click();
+		return this;
+	}
+
+	public MainPage clickOnNavBarOption(String option) {
+		WebElement navBarButton = driverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//nav[@class='_3EAPxMS']//span[contains(text(), '" + option + "')]")));
+		actions.moveToElement(navBarButton).perform();
+		return this;
+	}
+
+	public SearchResultPage clickOnNavBarOptionSubcategory(String subcategory) {
+		driverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//nav[@class='_3EAPxMS']//a[@class='_1cjL45H _2Y7IAa_ CLdGn9X _1XjY6Zd' and contains(text(), '" + subcategory + "')]"))).click();
+		return new SearchResultPage();
+	}
+
 	@Override
-	public MainPage openPage()
-	{
+	public MainPage openPage() {
 		driver.navigate().to(BASE_URL);
 		logger.info("Opened page " + BASE_URL);
 		return this;

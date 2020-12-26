@@ -13,7 +13,8 @@ public class ProfilePage extends AbstractPage {
     private static final By byCurrentEmailInput = By.xpath("//input[@type='email']");
 
     @FindBy (xpath = "//div[@class='_2roWJCL3cYLWn-WGjDB73j']")
-    WebElement welcomeTextName;
+
+    private WebElement welcomeTextName;
 
     public ProfilePage() {
         super();

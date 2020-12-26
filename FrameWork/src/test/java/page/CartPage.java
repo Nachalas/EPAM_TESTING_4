@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CartPage extends AbstractPage {
 
+    private static final String BASE_URL = "https://www.asos.com/ru/bag";
+
     @FindBy(xpath = "//div[@class='bag-item-descriptions']/p[@class='bag-item-name']/a")
     private WebElement productNameInCart;
 
@@ -19,20 +21,21 @@ public class CartPage extends AbstractPage {
         logger.info("Opened search results page " + driver.getCurrentUrl());
     }
 
-    public String getProductPriceInCart(){
+    public String getProductPriceInCart() {
         return driverWait.until(ExpectedConditions
                     .presenceOfElementLocated(byProductPriceInCart)).getText();
     }
 
-    public String getProductNameInCart(){
+    public String getProductNameInCart() {
         driverWait.until(driver -> !driver.findElement(byProductNameInCart).getText().equals(""));
         return this.productNameInCart.getText();
     }
 
     @Override
     public CartPage openPage() {
-        logger.error("Cannot open CartPage by itself! Throwing exception");
-        throw new RuntimeException("Cannot open CartPage by itself!");
+        driver.navigate().to(BASE_URL);
+        logger.info("Page opened: " +  BASE_URL);
+        return this;
     }
 
 

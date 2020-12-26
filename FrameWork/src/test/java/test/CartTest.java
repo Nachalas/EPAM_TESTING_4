@@ -1,7 +1,6 @@
 package test;
 
 import org.testng.annotations.Test;
-import org.testng.reporters.jq.Main;
 import page.CartPage;
 import page.MainPage;
 import page.ProductPage;
@@ -12,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CartTest extends CommonConditions {
 
     @Test
-    public void testAddToCart(){
+    public void addToCartTest() {
         String searchQuery = SearchResultPageDataReader.getMaskSearchQuery();
         MainPage mainPage = new MainPage();
 
