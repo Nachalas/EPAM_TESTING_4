@@ -10,16 +10,16 @@ public class LoginPage extends AbstractPage {
     private static final String BASE_URL = "https://my.asos.com/";
 
     @FindBy(xpath = "//input[@name='Username']")
-    WebElement usernameInput;
+    private WebElement usernameInput;
 
     @FindBy(xpath = "//input[@name='Password']")
-    WebElement passwordInput;
+    private WebElement passwordInput;
 
     @FindBy(xpath = "//input[@id='signin']")
-    WebElement logInButton;
+    private WebElement logInButton;
 
     @FindBy(xpath = "//li[@id='loginErrorMessage']")
-    WebElement errorMessage;
+    private WebElement errorMessage;
 
     public LoginPage enterUserCredentials(User user) {
         usernameInput.sendKeys(user.getMail());

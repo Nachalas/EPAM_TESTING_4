@@ -23,10 +23,18 @@ public class ProductPage extends AbstractPage {
     @FindBy(xpath = "//button[@data-test-id='add-button']")
     private WebElement addToCartButton;
 
+    @FindBy(xpath = "//span[@class='heartSecondary']")
+    private WebElement addToFavoritesButton;
+
     private static final By byAddToCartButton = By.xpath("//button[@data-test-id='add-button']");
     private static final By byGoToCartButton = By.xpath("//span[@class='_1M-cSy1']");
     private static final By byProductPrice = By.xpath("//span[@data-id='current-price']");
     private static final By byProductName = By.xpath("//div[@class='product-hero']/h1");
+
+    public ProductPage clickOnAddToFavoritesButton() {
+        addToFavoritesButton.click();
+        return this;
+    }
 
     public ProductPage(String pageUrl) {
         super();
