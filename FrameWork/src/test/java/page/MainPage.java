@@ -13,10 +13,13 @@ import util.Utils;
 
 import java.util.List;
 
-public class MainPage extends AbstractPage
-{
+public class MainPage extends AbstractPage {
 
 	private static final String BASE_URL = "https://www.asos.com/ru/";
+
+	private static final By byLogInButton = By.xpath("//a[@data-testid='signin-link']");
+	private static final By byProfileOptionsButton = By.xpath("//button[@data-testid='accountIcon']");
+	private static final By byMyAccountButton = By.xpath("//a[@data-testid='myaccount-link']");
 
 	@FindBy(id="chrome-search")
 	private WebElement mainSearchInput;
@@ -59,4 +62,19 @@ public class MainPage extends AbstractPage
 		return this;
 	}
 
+	public MainPage openProfileOptions() {
+		driverWait.until(ExpectedConditions.presenceOfElementLocated(byProfileOptionsButton)).click();
+		return this;
+	}
+
+	public LoginPage openLoginPage() {
+		driverWait.until(ExpectedConditions.elementToBeClickable(byLogInButton)).click();
+		return new LoginPage();
+	}
+
+	public ProfilePage openProfilePage() {
+		driverWait.until(ExpectedConditions.presenceOfElementLocated(byMyAccountButton));
+		driverWait.until(ExpectedConditions.elementToBeClickable(byMyAccountButton)).click();
+		return new ProfilePage();
+	}
 }
