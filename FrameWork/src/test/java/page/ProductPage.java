@@ -17,9 +17,6 @@ public class ProductPage extends AbstractPage {
 
     private String productPageUrl;
 
-    private static final By byNewRegionSpanInPopUp = By
-            .xpath("//li[@data-city-id='1985372']/span");
-
     public ProductPage(String pageUrl) {
         super();
         this.productPageUrl = pageUrl;
