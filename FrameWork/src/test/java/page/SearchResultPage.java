@@ -32,6 +32,8 @@ public class SearchResultPage extends AbstractPage {
     @FindBy(xpath = "//span[@class='_3VjzNxC']")
     private List<WebElement> priceWithDiscountListOfProducts;
 
+    private String firstPrice;
+
     private static final By byListOfProducts = By.xpath("//div[@class='_3J74XsK']/div/p");
     private static final By byPriceListOfProducts = By.xpath("//span[@class='_16nzq18']");
     private static final By byPriceWithDiscountListOfProducts = By.xpath("//span[@class='_3VjzNxC']");
@@ -51,24 +53,23 @@ public class SearchResultPage extends AbstractPage {
         );
     }
 
-
-
-    public List<Integer> getTopTenListOfPrices(){
-        driverWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(byPriceListOfProducts));
-        driverWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(byPriceWithDiscountListOfProducts));
-        driverWait.until(driver -> !driver.findElement(byPriceListOfProducts).getText().equals(""));
+    public List<Integer> getTopTenListOfPrices() {
+        logger.info(firstPrice);
+        driverWait.until(driver -> !driver.findElement(byPriceListOfProducts).getText().equals(firstPrice));
         return Utils
                 .convertListOfPricesToListOfInts(Utils
                         .parseListOfWebElementsToListOfStrings(priceListOfProducts.subList(0,10))
                 );
     }
 
-    public SearchResultPage clickOnOrderDropDownList(){
+    public SearchResultPage clickOnOrderDropDownList() {
         this.orderDropDownList.click();
         return this;
     }
 
-    public SearchResultPage chooseDescendingLabel(){
+    public SearchResultPage chooseDescendingLabel() {
+        firstPrice = driverWait
+                .until(ExpectedConditions.presenceOfAllElementsLocatedBy(byPriceListOfProducts)).get(0).getText();
         logger.info("Choosing descending Label");
         this.descendingLabel.click();
         return this;
