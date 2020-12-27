@@ -5,17 +5,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import model.User;
 import org.testng.annotations.Test;
 import page.MainPage;
-import service.TestDataReader;
-import service.UserCreator;
-
-import java.util.List;
+import service.UserDataReader;
 
 public class LogInTest extends CommonConditions {
 
     @Test
     public void testLogInWithCorrectUser() {
-        User user = UserCreator.withCredentialsFromProperty();
+        User user = UserDataReader.withCredentialsFromProperty();
         String expectedNameAndSurname = user.getName() + " " + user.getSurname();
+
         String actualNameAndSurname = new MainPage()
                 .openPage()
                 .openProfileOptions()
@@ -26,13 +24,15 @@ public class LogInTest extends CommonConditions {
                 .openProfilePage()
                 .openInformationTab()
                 .getNameAndSurnameInWelcomeText();
+
         assertThat(actualNameAndSurname).isEqualTo(expectedNameAndSurname);
     }
 
     @Test
     public void testLogInWithIncorrectUser() {
-        User wrongUser = UserCreator.withWrongUserData();
-        String expectedMessage = TestDataReader.getTestData("testdata.error.wrongUser");
+        User wrongUser = UserDataReader.withWrongUserData();
+        String expectedMessage = UserDataReader.getTestDataWrongUser();
+
         String actualMessage = new MainPage()
                 .openPage()
                 .openProfileOptions()
@@ -40,6 +40,7 @@ public class LogInTest extends CommonConditions {
                 .enterUserCredentials(wrongUser)
                 .logInWithIncorrectData()
                 .getErrorMessage();
+
         assertThat(actualMessage).isEqualTo(expectedMessage);
     }
 

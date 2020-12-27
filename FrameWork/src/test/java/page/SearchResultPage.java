@@ -54,8 +54,9 @@ public class SearchResultPage extends AbstractPage {
 
 
     public List<Integer> getTopTenListOfPrices(){
-        driverWait.until(driver -> !driver.findElement(byPriceListOfProducts).getText().equals(""));
         driverWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(byPriceListOfProducts));
+        driverWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(byPriceWithDiscountListOfProducts));
+        driverWait.until(driver -> !driver.findElement(byPriceListOfProducts).getText().equals(""));
         return Utils
                 .convertListOfPricesToListOfInts(Utils
                         .parseListOfWebElementsToListOfStrings(priceListOfProducts.subList(0,10))
@@ -68,6 +69,7 @@ public class SearchResultPage extends AbstractPage {
     }
 
     public SearchResultPage chooseDescendingLabel(){
+        logger.info("Choosing descending Label");
         this.descendingLabel.click();
         return this;
     }

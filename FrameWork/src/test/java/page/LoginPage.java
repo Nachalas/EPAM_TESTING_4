@@ -3,7 +3,6 @@ package page;
 import model.User;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.reporters.jq.Main;
 
 public class LoginPage extends AbstractPage {
 
@@ -22,17 +21,21 @@ public class LoginPage extends AbstractPage {
     private WebElement errorMessage;
 
     public LoginPage enterUserCredentials(User user) {
+        logger.info("Send "+ user.getMail());
+        logger.info("Send "+ user.getPassword());
         usernameInput.sendKeys(user.getMail());
         passwordInput.sendKeys(user.getPassword());
         return this;
     }
 
     public MainPage logInWithCorrectData() {
+        logger.info("Clicking on login button");
         logInButton.click();
         return new MainPage();
     }
 
     public LoginPage logInWithIncorrectData() {
+        logger.info("Clicking on login button");
         logInButton.click();
         return this;
     }

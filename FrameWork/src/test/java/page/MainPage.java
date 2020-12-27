@@ -1,15 +1,9 @@
 package page;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.reporters.jq.Main;
-import util.CustomConditions;
 import util.Utils;
 
 import java.util.List;
@@ -33,8 +27,6 @@ public class MainPage extends AbstractPage {
 	@FindBy(xpath = "//span[@class='_1iEQyiq']")
 	private List<WebElement> listOfSuggestions;
 
-	@FindBy(xpath = "")
-
 
 
 	public MainPage()
@@ -43,11 +35,13 @@ public class MainPage extends AbstractPage {
 	}
 
 	public MainPage sendLineInMainSearchInput(String searchLine){
+		logger.info("Send searchLine - " + searchLine);
 		this.mainSearchInput.sendKeys(searchLine);
 		return this;
 	}
 
 	public MainPage selectSex(String sex) {
+		logger.info("Send sex - " + sex);
 		driver.findElement(By.xpath("//a[contains(text(), '" + sex + "')]")).click();
 		return this;
 	}
@@ -67,19 +61,21 @@ public class MainPage extends AbstractPage {
 		return new SearchResultPage();
 	}
 
-	public MainPage selectSex (String sex) {
-		driver.findElement(By.xpath("//a[contains(text(), '" + sex + "')]")).click();
-		return this;
-	}
 
 	public MainPage clickOnNavBarOption(String option) {
-		WebElement navBarButton = driverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//nav[@class='_3EAPxMS']//span[contains(text(), '" + option + "')]")));
+		WebElement navBarButton = driverWait
+				.until(ExpectedConditions.presenceOfElementLocated(By
+						.xpath("//nav[@class='_3EAPxMS']//span[contains(text(), '"
+								+ option + "')]")));
 		actions.moveToElement(navBarButton).perform();
 		return this;
 	}
 
 	public SearchResultPage clickOnNavBarOptionSubcategory(String subcategory) {
-		driverWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//nav[@class='_3EAPxMS']//a[@class='_1cjL45H _2Y7IAa_ CLdGn9X _1XjY6Zd' and contains(text(), '" + subcategory + "')]"))).click();
+		driverWait.until(ExpectedConditions.presenceOfElementLocated(By
+				.xpath("//nav[@class='_3EAPxMS']//a[@class='_1cjL45H _2Y7IAa_ CLdGn9X _1XjY6Zd' and contains(text(), '"
+						+ subcategory + "')]")))
+				.click();
 		return new SearchResultPage();
 	}
 
